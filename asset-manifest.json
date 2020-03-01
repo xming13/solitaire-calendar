@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/solitaire-calendar/static/css/main.01727c45.chunk.css",
+    "main.css": "/solitaire-calendar/static/css/main.6df59911.chunk.css",
     "main.js": "/solitaire-calendar/static/js/main.ff49a14c.chunk.js",
     "main.js.map": "/solitaire-calendar/static/js/main.ff49a14c.chunk.js.map",
     "runtime-main.js": "/solitaire-calendar/static/js/runtime-main.bd864f6b.js",
@@ -8,16 +8,16 @@
     "static/js/2.dc2fba1d.chunk.js": "/solitaire-calendar/static/js/2.dc2fba1d.chunk.js",
     "static/js/2.dc2fba1d.chunk.js.map": "/solitaire-calendar/static/js/2.dc2fba1d.chunk.js.map",
     "index.html": "/solitaire-calendar/index.html",
-    "precache-manifest.b358dafe35202c9d9456e31c8d80a060.js": "/solitaire-calendar/precache-manifest.b358dafe35202c9d9456e31c8d80a060.js",
+    "precache-manifest.71b3d005c34be9d3a341653624275f89.js": "/solitaire-calendar/precache-manifest.71b3d005c34be9d3a341653624275f89.js",
     "service-worker.js": "/solitaire-calendar/service-worker.js",
-    "static/css/main.01727c45.chunk.css.map": "/solitaire-calendar/static/css/main.01727c45.chunk.css.map",
+    "static/css/main.6df59911.chunk.css.map": "/solitaire-calendar/static/css/main.6df59911.chunk.css.map",
     "static/js/2.dc2fba1d.chunk.js.LICENSE.txt": "/solitaire-calendar/static/js/2.dc2fba1d.chunk.js.LICENSE.txt",
     "static/media/joker.png": "/solitaire-calendar/static/media/joker.ae567fe4.png"
   },
   "entrypoints": [
     "static/js/runtime-main.bd864f6b.js",
     "static/js/2.dc2fba1d.chunk.js",
-    "static/css/main.01727c45.chunk.css",
+    "static/css/main.6df59911.chunk.css",
     "static/js/main.ff49a14c.chunk.js"
   ]
 }

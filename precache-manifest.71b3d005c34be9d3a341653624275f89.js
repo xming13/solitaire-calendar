@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d4222cfee49886ddd8347d93fa80ce06",
+    "revision": "db577d0344272da3348d660be97f2861",
     "url": "/solitaire-calendar/index.html"
   },
   {
-    "revision": "734db42d13d5d87e6e33",
-    "url": "/solitaire-calendar/static/css/main.01727c45.chunk.css"
+    "revision": "45c6754ff607b478d932",
+    "url": "/solitaire-calendar/static/css/main.6df59911.chunk.css"
   },
   {
     "revision": "34188adddbfbee5d2b74",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/solitaire-calendar/static/js/2.dc2fba1d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "734db42d13d5d87e6e33",
+    "revision": "45c6754ff607b478d932",
     "url": "/solitaire-calendar/static/js/main.ff49a14c.chunk.js"
   },
   {
