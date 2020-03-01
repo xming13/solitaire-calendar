@@ -147,6 +147,14 @@
   transform: translate(-52%, -52%);
 }
 
+.tooltip-day {
+  background-color: var(--white) !important;
+  color: #000 !important;
+}
+.tooltip-day.place-top:after {
+  border-top-color: var(--white) !important;
+}
+
 .red {
   color: #f00;
 }

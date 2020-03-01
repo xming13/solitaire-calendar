@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import ReactTooltip from 'react-tooltip'
+
 import './Calendar.css';
 
 // https://flyclipart.com/joker-icon-free-of-free-vector-emoji-joker-card-png-897578
@@ -21,7 +23,6 @@ function Calendar() {
   const year = today.getFullYear();
 
   const dayOfYear = getDayOfYear(new Date());
-  console.log("dayOfYear:", dayOfYear);
 
   const SUITS = ['♦', '♣', '♥', '♠'];
   const RANKS =['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'JOKER'];
@@ -87,7 +88,7 @@ function Calendar() {
     const className = `day ${isToday && 'day--today'} ${dayIndex === 0 && 'day-of-week--first'} ${dayIndex === daysOfWeek.length - 1 && 'day-of-week--last'}`;
 
     return (
-      <div className={className} key={dayIndex}>
+      <div className={className} key={dayIndex} data-for="tooltip-day" data-tip={JSON.stringify({ day, dayIndex, weekIndex, isToday })}>
         { dayIndex === 0 && <div className={`week-label ${suitCssClass(SUITS[weekIndex])}`}><div>{monthRank}</div><div>{SUITS[weekIndex]}</div></div> }
         <div className="text">{day}</div>
         { dayIndex === daysOfWeek.length - 1 && <div className={`week-label week-label--end ${suitCssClass(SUITS[weekIndex])}`}><div>{monthRank}</div><div>{SUITS[weekIndex]}</div></div> }
@@ -113,6 +114,38 @@ function Calendar() {
     }
   }
 
+  const getTooltipContent = (dataTip) => {
+    ReactTooltip.rebuild();
+
+    if (!dataTip) {
+      return null;
+    }
+
+    const { day, dayIndex, weekIndex, isToday } = JSON.parse(dataTip);
+
+    // 1 - 366
+    const dayInYear = currentSolitaireMonthIndex * NUM_DAYS_IN_SOLITAIRE_MONTH + weekIndex * NUM_DAYS_IN_WEEK + dayIndex + 1;
+
+    // Find card by season
+    const NUM_DAYS_IN_13_WEEKS = 13 * NUM_DAYS_IN_WEEK;
+
+    // 0 - 5
+    const seasonIndex = Math.floor((dayInYear - 1) / NUM_DAYS_IN_13_WEEKS);
+    const seasonWeekIndex = Math.floor((dayInYear - 1) % NUM_DAYS_IN_13_WEEKS / NUM_DAYS_IN_WEEK);
+    const seasonSuit = SUITS[seasonIndex];
+    const seasonRank = RANKS[seasonWeekIndex];
+
+    return `
+day in year: ${dayInYear}
+<br>    
+Month: <span class="${suitCssClass(yearSuit)}">${yearSuit}${monthRank}</span>
+<br>      
+Week : <span class="${suitCssClass(SUITS[weekIndex])}">${SUITS[weekIndex]}${monthRank}</span>
+<br>
+Season: <span class="${suitCssClass(seasonSuit)}">${seasonSuit}${seasonRank}</span>
+`;
+  }
+
   return (
     <div className="calendar">
       <div className="calendar-container">
@@ -121,7 +154,7 @@ function Calendar() {
           {/*<div className="year invisible">{yearSuit} {year}</div>*/}
           <div className="month">
             <div className="arrow arrow--left" onClick={handleDecrementMonth}>&lt;</div>
-            <div>The month of {monthRank}</div>
+            <div>{monthRank === 'JOKER' ? monthRank : `The month of ${monthRank}`}</div>
             <div className="arrow arrow--right" onClick={handleIncrementMonth}>&gt;</div>
           </div>
         </div>
@@ -136,8 +169,11 @@ function Calendar() {
           {/*  <div className="day-label">Sat</div>*/}
           {/*</div>*/}
           { currentSolitaireMonthIndex === 13 ? <JokerMonth /> : daysOfWeeks.map((daysOfWeek, weekIndex) => DaysOfWeek(daysOfWeek, weekIndex)) }
+
         </div>
       </div>
+
+      <ReactTooltip id="tooltip-day" getContent={getTooltipContent} html={true} className="tooltip-day" clickable={true} />
     </div>
   )
 }
