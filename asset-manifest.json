@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/solitaire-calendar/static/css/main.349423a8.chunk.css",
-    "main.js": "/solitaire-calendar/static/js/main.81f932da.chunk.js",
-    "main.js.map": "/solitaire-calendar/static/js/main.81f932da.chunk.js.map",
-    "runtime-main.js": "/solitaire-calendar/static/js/runtime-main.16d0735d.js",
-    "runtime-main.js.map": "/solitaire-calendar/static/js/runtime-main.16d0735d.js.map",
-    "static/js/2.ec1a6315.chunk.js": "/solitaire-calendar/static/js/2.ec1a6315.chunk.js",
-    "static/js/2.ec1a6315.chunk.js.map": "/solitaire-calendar/static/js/2.ec1a6315.chunk.js.map",
+    "main.css": "/solitaire-calendar/static/css/main.1a996a0c.chunk.css",
+    "main.js": "/solitaire-calendar/static/js/main.7ec9cded.chunk.js",
+    "main.js.map": "/solitaire-calendar/static/js/main.7ec9cded.chunk.js.map",
+    "runtime-main.js": "/solitaire-calendar/static/js/runtime-main.bd864f6b.js",
+    "runtime-main.js.map": "/solitaire-calendar/static/js/runtime-main.bd864f6b.js.map",
+    "static/js/2.dc2fba1d.chunk.js": "/solitaire-calendar/static/js/2.dc2fba1d.chunk.js",
+    "static/js/2.dc2fba1d.chunk.js.map": "/solitaire-calendar/static/js/2.dc2fba1d.chunk.js.map",
     "index.html": "/solitaire-calendar/index.html",
-    "precache-manifest.a76186020aad7313edda33c045ec8477.js": "/solitaire-calendar/precache-manifest.a76186020aad7313edda33c045ec8477.js",
+    "precache-manifest.b925ade38c167cfcc4423724e17245da.js": "/solitaire-calendar/precache-manifest.b925ade38c167cfcc4423724e17245da.js",
     "service-worker.js": "/solitaire-calendar/service-worker.js",
-    "static/css/main.349423a8.chunk.css.map": "/solitaire-calendar/static/css/main.349423a8.chunk.css.map",
-    "static/js/2.ec1a6315.chunk.js.LICENSE.txt": "/solitaire-calendar/static/js/2.ec1a6315.chunk.js.LICENSE.txt"
+    "static/css/main.1a996a0c.chunk.css.map": "/solitaire-calendar/static/css/main.1a996a0c.chunk.css.map",
+    "static/js/2.dc2fba1d.chunk.js.LICENSE.txt": "/solitaire-calendar/static/js/2.dc2fba1d.chunk.js.LICENSE.txt",
+    "static/media/joker.png": "/solitaire-calendar/static/media/joker.ae567fe4.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.16d0735d.js",
-    "static/js/2.ec1a6315.chunk.js",
-    "static/css/main.349423a8.chunk.css",
-    "static/js/main.81f932da.chunk.js"
+    "static/js/runtime-main.bd864f6b.js",
+    "static/js/2.dc2fba1d.chunk.js",
+    "static/css/main.1a996a0c.chunk.css",
+    "static/js/main.7ec9cded.chunk.js"
   ]
 }
