@@ -1,0 +1,151 @@
+:root {
+  --white: #fff;
+}
+
+.calendar {
+  font-family: 'Delius', cursive;
+  padding: 14px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 700px; /* aspect-ratio of poker card: 1.4 */
+  border-radius: 12px;
+  background-image: linear-gradient(135deg, #F00 9%, #000 100%);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.calendar-container {
+  position: relative;
+  width: 100%;
+  padding-top: 140%;
+}
+
+.calendar--header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 42%;
+  /*display: flex;*/
+  padding: 24px 12px;
+  color: var(--white);
+}
+
+.year {
+  font-size: 20px;
+  /*margin-left: auto;*/
+}
+
+.month {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28px;
+}
+
+.arrow {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color .3s, color .3s;
+}
+.arrow:hover {
+  background-color: var(--white);
+  color: #000;
+}
+.arrow-left {
+}
+.arrow-right {
+}
+
+.invisible {
+  margin-left: 0;
+  margin-right: auto;
+  visibility: hidden;
+}
+
+.calendar--body {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.days-label {
+  display: flex;
+}
+
+.day-label {
+  width: 14.2857142857%;
+  padding: 12px 0;
+  border: 1px solid var(--white);;
+  color: var(--white);;
+  text-transform: uppercase;
+}
+
+.week-label {
+  position: absolute;
+  font-size: 14px;
+  line-height: 11px;
+  top: 4px;
+  left: 4px;
+}
+
+.day-of-week--first:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 50%;
+  background-color: var(--white);;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+  clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+}
+
+.day-of-week--last:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  background-color: var(--white);;
+  -webkit-clip-path: polygon(100% 100%, 100% 0%, 0% 100%);
+  clip-path: polygon(100% 100%, 100% 0%, 0% 100%);
+}
+
+.week-label--end {
+  top: auto;
+  left: auto;
+  right: 4px;
+  bottom: 4px;
+  transform: rotate(180deg);
+}
+
+.week {
+  display: flex;
+}
+
+.day {
+  position: relative;
+  width: 14.2857142857%;
+  padding-top: 20%; /* 1.4 aspect ratio */
+  border: 1px solid var(--white);
+}
+
+.day .text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.red {
+  color: #f00;
+}
+
+.black {
+  color: #000;
+}
