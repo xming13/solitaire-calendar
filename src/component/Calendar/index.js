@@ -139,7 +139,6 @@ function Calendar() {
     }
 
     const { dayIndex, weekIndex, isJoker = false } = JSON.parse(dataTip);
-    console.log("dayIndex, weekIndex:", dayIndex, weekIndex, isJoker);
 
     // 1 - 366
     const dayInYear = currentSolitaireMonthIndex * NUM_DAYS_IN_SOLITAIRE_MONTH + weekIndex * NUM_DAYS_IN_WEEK + dayIndex + 1;
