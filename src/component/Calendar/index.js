@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactTooltip from 'react-tooltip'
 
 import './Calendar.css';
@@ -28,6 +28,7 @@ function Calendar() {
   const RANKS =['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'JOKER'];
   const NUM_DAYS_IN_SOLITAIRE_MONTH = 28;
   const NUM_DAYS_IN_WEEK = 7;
+  const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   const daysOfWeeks = [
     [1,2,3,4,5,6,7],
@@ -48,6 +49,10 @@ function Calendar() {
   const [currentYear, setCurrentYear] = useState(year);
   const [currentSolitaireMonthIndex, setCurrentSolitaireMonthIndex] = useState(todaySolitaireMonthIndex);
 
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  }, []);
+
   const monthRank = RANKS[currentSolitaireMonthIndex];
   const yearSuit = SUITS[currentYear % 4];
 
@@ -59,14 +64,22 @@ function Calendar() {
     return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
   }
 
-  const JokerMonth = function() {
+  const JokerMonth = () => {
     return (
-      <div style={{display: 'flex', justifyContent: 'center'}}>
-        <img src={joker} width="50%" alt="joker day"/>
-        { isLeapYear(currentYear) && <img src={joker} width="50%" alt="joker day" style={{transform: 'rotateY(180deg)'}}/> }
+      <div style={{display: 'flex', justifyContent: 'center', marginBottom: '52%'}}>
+        <div data-for="tooltip-day" data-tip={JSON.stringify({ dayIndex: 0, weekIndex: 0, isJoker: true })} style={{ width: '50%'}}>
+          <img src={joker} width="100%" alt="joker day" />
+        </div>
+
+        {
+          isLeapYear(currentYear) &&
+          <div data-for="tooltip-day" data-tip={JSON.stringify({ dayIndex: 1, weekIndex: 0, isJoker: true })} style={{ width: '50%'}}>
+            <img src={joker} width="100%" alt="joker day" style={{transform: 'rotateY(180deg)'}}/>
+          </div>
+        }
       </div>
     )
-  };
+  }
 
   const DaysOfWeek = (daysOfWeek, weekIndex) => {
     return (
@@ -85,10 +98,10 @@ function Calendar() {
   }
 
   const Day = (day, dayIndex, daysOfWeek, weekIndex, isToday) => {
-    const className = `day ${isToday && 'day--today'} ${dayIndex === 0 && 'day-of-week--first'} ${dayIndex === daysOfWeek.length - 1 && 'day-of-week--last'}`;
+    const className = `day ${isToday ? 'day--today' : ''} ${dayIndex === 0 ? 'day-of-week--first' : ''} ${dayIndex === daysOfWeek.length - 1 ? 'day-of-week--last' : ''}`;
 
     return (
-      <div className={className} key={dayIndex} data-for="tooltip-day" data-tip={JSON.stringify({ day, dayIndex, weekIndex, isToday })}>
+      <div className={className} key={dayIndex} data-for="tooltip-day" data-tip={JSON.stringify({ dayIndex, weekIndex })}>
         { dayIndex === 0 && <div className={`week-label ${suitCssClass(SUITS[weekIndex])}`}><div>{monthRank}</div><div>{SUITS[weekIndex]}</div></div> }
         <div className="text">{day}</div>
         { dayIndex === daysOfWeek.length - 1 && <div className={`week-label week-label--end ${suitCssClass(SUITS[weekIndex])}`}><div>{monthRank}</div><div>{SUITS[weekIndex]}</div></div> }
@@ -103,6 +116,9 @@ function Calendar() {
     if (newMonthIndex === 0) {
       setCurrentYear(currentYear + 1);
     }
+
+    // quick fix for tooltip not showing when navigating
+    setTimeout(() => ReactTooltip.rebuild(), 100);
   }
 
   const handleDecrementMonth = () => {
@@ -112,19 +128,23 @@ function Calendar() {
     if (newMonthIndex === RANKS.length - 1) {
       setCurrentYear(currentYear - 1);
     }
+
+    // quick fix for tooltip not showing when navigating
+    setTimeout(() => ReactTooltip.rebuild(), 100);
   }
 
   const getTooltipContent = (dataTip) => {
-    ReactTooltip.rebuild();
-
     if (!dataTip) {
       return null;
     }
 
-    const { day, dayIndex, weekIndex, isToday } = JSON.parse(dataTip);
+    const { dayIndex, weekIndex, isJoker = false } = JSON.parse(dataTip);
+    console.log("dayIndex, weekIndex:", dayIndex, weekIndex, isJoker);
 
     // 1 - 366
     const dayInYear = currentSolitaireMonthIndex * NUM_DAYS_IN_SOLITAIRE_MONTH + weekIndex * NUM_DAYS_IN_WEEK + dayIndex + 1;
+
+    const date = new Date(currentYear, 0, dayInYear);
 
     // Find card by season
     const NUM_DAYS_IN_13_WEEKS = 13 * NUM_DAYS_IN_WEEK;
@@ -135,11 +155,23 @@ function Calendar() {
     const seasonSuit = SUITS[seasonIndex];
     const seasonRank = RANKS[seasonWeekIndex];
 
-    return `
+    if (isJoker) {
+      return `
+date: ${date.getDate()} ${MONTH_NAMES[date.getMonth()]}
+<br>
 day in year: ${dayInYear}
-<br>    
+<br>
+<span class="red">JOKER</span>
+`;
+    }
+    
+    return `
+date: ${date.getDate()} ${MONTH_NAMES[date.getMonth()]}
+<br>
+day in year: ${dayInYear}
+<br>
 Month: <span class="${suitCssClass(yearSuit)}">${yearSuit}${monthRank}</span>
-<br>      
+<br>
 Week : <span class="${suitCssClass(SUITS[weekIndex])}">${SUITS[weekIndex]}${monthRank}</span>
 <br>
 Season: <span class="${suitCssClass(seasonSuit)}">${seasonSuit}${seasonRank}</span>
@@ -148,6 +180,8 @@ Season: <span class="${suitCssClass(seasonSuit)}">${seasonSuit}${seasonRank}</sp
 
   return (
     <div className="calendar">
+      <ReactTooltip id="tooltip-day" type="light" border={true} getContent={(dataTip) => getTooltipContent(dataTip)} html={true} className="tooltip-day" clickable={true} />
+
       <div className="calendar-container">
         <div className="calendar--header">
           <div className="year">{yearSuit} {currentYear}</div>
@@ -168,12 +202,10 @@ Season: <span class="${suitCssClass(seasonSuit)}">${seasonSuit}${seasonRank}</sp
           {/*  <div className="day-label">Fri</div>*/}
           {/*  <div className="day-label">Sat</div>*/}
           {/*</div>*/}
-          { currentSolitaireMonthIndex === 13 ? <JokerMonth /> : daysOfWeeks.map((daysOfWeek, weekIndex) => DaysOfWeek(daysOfWeek, weekIndex)) }
 
+          { currentSolitaireMonthIndex === 13 ? <JokerMonth /> : daysOfWeeks.map((daysOfWeek, weekIndex) => DaysOfWeek(daysOfWeek, weekIndex)) }
         </div>
       </div>
-
-      <ReactTooltip id="tooltip-day" getContent={getTooltipContent} html={true} className="tooltip-day" clickable={true} />
     </div>
   )
 }
