@@ -2,7 +2,7 @@
   "name": "solitaire-calendar",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://xming13.github.io/solitaire-calendar",
+  "homepage": "https://xming13.github.io/solitaire-calendar/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
