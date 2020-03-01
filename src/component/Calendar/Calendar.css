@@ -87,6 +87,7 @@
 .week-label {
   position: absolute;
   font-size: 14px;
+  font-weight: bold;
   line-height: 11px;
   top: 2px;
   left: 2px;
@@ -101,6 +102,7 @@
 
 .day--today {
   background-color: rgba(255, 255, 255, .6);
+  font-weight: bold;
 }
 
 .day-of-week--first:before {
